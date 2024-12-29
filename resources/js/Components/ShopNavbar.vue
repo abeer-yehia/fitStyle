@@ -12,7 +12,7 @@
                     <!-- Left Side -->
                     <div class="flex items-center space-x-2">
                         <h1 class="text-base font-medium uppercase">
-                            <Link :href="route('shop')"><span style="color: rgb(90, 132, 78)">Inertia</span>Shop</Link>
+                            <Link :href="route('shop')"><span style="color: rgb(90, 132, 78)">FitStyle</span>Apparel</Link>
                         </h1>
                     </div>
 

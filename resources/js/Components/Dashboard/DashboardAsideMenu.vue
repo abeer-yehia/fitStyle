@@ -20,6 +20,28 @@ const toggleShowSettings = () => {
         >
             <span>Overview</span>
         </Link>
+        <Link
+            class="block text-sm border-l-4 pl-6 py-2 transition"
+            :class="route().current('sections.index') ? 'border-c-green-100 bg-slate-600 text-white' : 'border-transparent text-slate-300'"
+            :href="route('sections.index')"
+        >
+            <span>Sections</span>
+        </Link>
+        <Link
+            class="block text-sm border-l-4 pl-6 py-2 transition"
+            :class="route().current('categories.index') ? 'border-c-green-100 bg-slate-600 text-white' : 'border-transparent text-slate-300'"
+            :href="route('categories.index')"
+        >
+            <span>Categories</span>
+        </Link>
+        <Link
+            class="block text-sm border-l-4 pl-6 py-2 transition"
+            :class="route().current('products.index') ? 'border-c-green-100 bg-slate-600 text-white' : 'border-transparent text-slate-300'"
+            :href="route('products.index')"
+        >
+            <span>Products</span>
+        </Link>
+      
 
         <Link
             class="block text-sm border-l-4 pl-6 py-2 transition"

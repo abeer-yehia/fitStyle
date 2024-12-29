@@ -6,16 +6,21 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\MoveToCartController;
 use App\Http\Controllers\SaveForLaterController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\DashboardCategoryController;
 use App\Http\Controllers\DashboardSettingsProfileController;
 use App\Http\Controllers\DashboardSettingsPasswordController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardOrderController;
+use App\Http\Controllers\DashboardProductController;
+use App\Http\Controllers\DashboardSectionController;
 use App\Http\Controllers\WhishlistController;
 use Illuminate\Support\Facades\Route;
 
 // SHOP
 Route::get('/shop', ShopController::class)->name('shop');
-Route::get('/', ShopController::class)->name('shop');
+Route::get('/', function () {
+    return redirect()->route('shop');
+});
 
 // PRODUCTS
 Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('product.show');
@@ -50,6 +55,19 @@ Route::middleware(['auth'])->group(function () {
     // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/orders', [DashboardOrderController::class, 'index'])->name('order.index');
+    // Route::get('/dashboard/sections', [DashboardSectionController::class, 'index'])->name('section.index');
+    // Route::get('/dashboard/sections/create', [DashboardSectionController::class, 'create'])->name('section.create');
+    // Route::post('/dashboard/sections', [DashboardSectionController::class, 'store'])->name('section.store');
+    Route::resource('/dashboard/sections', DashboardSectionController::class)->except(['show']);;
+    Route::resource('/dashboard/categories', DashboardCategoryController::class)->except(['show']);;
+    Route::resource('/dashboard/products', DashboardProductController::class)->except(['show']);;
+    // Route::get('/dashboard/categories', [DashboardCategoryController::class, 'index'])->name('category.index');
+    // Route::get('/dashboard/categories/create', [DashboardCategoryController::class, 'create'])->name('category.create');
+    // Route::post('/dashboard/categories/store', [DashboardCategoryController::class, 'store'])->name('category.store');
+    // Route::get('/dashboard/categories/edit', [DashboardCategoryController::class, 'edit'])->name('category.edit');
+    // Route::patch('/dashboard/categories/update', [DashboardCategoryController::class, 'update'])->name('category.update');
+    // Route::delete('dashboard/categories/{id}', [DashboardCategoryController::class, 'destroy'])->name('category.destroy');
+
 
     // DASHBOARD SETTINGS
     Route::get('/dashboard/settings/profile', [DashboardSettingsProfileController::class, 'edit'])->name('settings.profile.edit');

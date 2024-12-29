@@ -7,7 +7,11 @@ import { InertiaProgress } from '@inertiajs/progress';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import { ZiggyVue } from '../../vendor/tightenco/ziggy/dist/vue.m';
 import dayjs from 'dayjs'
+import jQuery from 'jquery';
+import swal from 'sweetalert2';
 
+window.Swal = swal;
+window.$ = jQuery;
 const appName = window.document.getElementsByTagName('title')[0]?.innerText || 'Laravel';
 
 createInertiaApp({
@@ -30,3 +34,4 @@ InertiaProgress.init({
     color: 'rgb(141, 206, 121)',
     showSpinner: false
 });
+

@@ -17,6 +17,19 @@ class Product extends Model
 
     protected $with = ['images'];
 
+    public function scopeWithSections($query, $sectionSlugs)
+    {
+        $query->when($sectionSlugs, function ($query) use ($sectionSlugs) {
+            $query->whereHas('section', function ($query) use ($sectionSlugs) {
+                if (Str::contains($sectionSlugs, ',')) {
+                    $query->whereIn('slug', explode(',', $sectionSlugs));
+                } else {
+                    $query->where('slug', $sectionSlugs);
+                }
+            });
+        });
+    }
+
     public function scopeWithCategories($query, $categorySlugs)
     {
         $query->when($categorySlugs, function ($query) use ($categorySlugs) {
@@ -78,6 +91,11 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function section()
+    {
+        return $this->belongsTo(Section::class);
     }
 
     public function orders()

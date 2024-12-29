@@ -6,6 +6,7 @@ import pickBy from 'lodash/pickBy'
 import ShopLayout from "@/Layouts/ShopLayout.vue";
 import ProductCard from "@/Components/ProductCard.vue";
 import ProductCategoryFilter from "@/Components/ProductFilters/ProductCategoryFilter.vue";
+import ProductSectionFilter from "@/Components/ProductFilters/ProductSectionFilter.vue";
 import ProductPriceFilter from "@/Components/ProductFilters/ProductPriceFilter.vue";
 import ProductSearch from "@/Components/ProductFilters/ProductSearch.vue";
 import AppliedFilters from "@/Components/ProductFilters/AppliedFilters.vue";
@@ -14,6 +15,8 @@ import Pagination from "@/Components/Pagination.vue";
 
 const props = defineProps({
     products: Object,
+    sections: Array,
+    section: String,
     categories: Array,
     category: String,
     search: String,
@@ -23,12 +26,17 @@ const props = defineProps({
 });
 
 const filters = ref({
+    section: props.section,
     category: props.category,
     search: props.search,
     min_price: props.min_price,
     max_price: props.max_price,
     sortBy: props.sortBy,
 });
+
+const setSection = (value) => {
+    filters.value.section = value
+}
 
 const setCategory = (value) => {
     filters.value.category = value
@@ -65,6 +73,12 @@ watch(filters.value, value => {
                     :search="props.search"
                     @setSearch="setSearch"
                 ></ProductSearch>
+
+                <ProductSectionFilter
+                    :section="props.section"
+                    :sections="props.sections"
+                    @setSection="setSection"
+                ></ProductSectionFilter>
 
                 <ProductCategoryFilter
                     :category="props.category"
