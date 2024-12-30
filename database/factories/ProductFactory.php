@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Category;
+use App\Models\Section;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -23,6 +24,7 @@ class ProductFactory extends Factory
 
         return [
             'category_id' => Category::all()->random()->id,
+            'section_id' => null,
             'name' => $name,
             'slug' => $slug,
             'description' => $this->faker->paragraph(3),

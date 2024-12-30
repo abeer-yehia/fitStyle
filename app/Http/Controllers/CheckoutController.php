@@ -18,51 +18,51 @@ class CheckoutController extends Controller
 {
     public function store()
     {
-        $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
+        // $stripe = new \Stripe\StripeClient(env('STRIPE_SECRET_KEY'));
 
-        $products = Cart::getContent();
+        // $products = Cart::getContent();
 
-        $lineItems = [];
+        // $lineItems = [];
 
-        foreach ($products as $product) {
-            $lineItems[] = [
-                'price_data' => [
-                    'currency' => 'eur',
-                    'product_data' => [
-                        'name' => $product->name,
-                    ],
-                    'unit_amount_decimal' => str_replace('.', '', $product->price),
-                ],
-                'quantity' => $product->pivot->quantity
-            ];
-        }
+        // foreach ($products as $product) {
+        //     $lineItems[] = [
+        //         'price_data' => [
+        //             'currency' => 'eur',
+        //             'product_data' => [
+        //                 'name' => $product->name,
+        //             ],
+        //             'unit_amount_decimal' => str_replace('.', '', $product->price),
+        //         ],
+        //         'quantity' => $product->pivot->quantity
+        //     ];
+        // }
 
-        $checkout_session = $stripe->checkout->sessions->create([
-            'line_items' => $lineItems,
-            'shipping_address_collection' => ['allowed_countries' => ['IT']],
-            'shipping_options' => [
-                [
-                    'shipping_rate_data' => [
-                        'type' => 'fixed_amount',
-                        'fixed_amount' => ['amount' => 0, 'currency' => 'eur'],
-                        'display_name' => 'Free shipping',
-                        'delivery_estimate' => [
-                            'minimum' => ['unit' => 'business_day', 'value' => 5],
-                            'maximum' => ['unit' => 'business_day', 'value' => 7],
-                        ],
-                    ],
-                ],
-            ],
-            'mode' => 'payment',
-            'payment_method_types' => ['card'],
-            'success_url' => route('checkout.success', [], true) . "?checkout_session_id={CHECKOUT_SESSION_ID}",
-            'cancel_url' => route('checkout.failure', [], true),
-            'metadata' => [
-                'user_id'  => auth()->user()->id,
-            ],
-        ]);
+        // $checkout_session = $stripe->checkout->sessions->create([
+        //     'line_items' => $lineItems,
+        //     'shipping_address_collection' => ['allowed_countries' => ['IT']],
+        //     'shipping_options' => [
+        //         [
+        //             'shipping_rate_data' => [
+        //                 'type' => 'fixed_amount',
+        //                 'fixed_amount' => ['amount' => 0, 'currency' => 'eur'],
+        //                 'display_name' => 'Free shipping',
+        //                 'delivery_estimate' => [
+        //                     'minimum' => ['unit' => 'business_day', 'value' => 5],
+        //                     'maximum' => ['unit' => 'business_day', 'value' => 7],
+        //                 ],
+        //             ],
+        //         ],
+        //     ],
+        //     'mode' => 'payment',
+        //     'payment_method_types' => ['card'],
+        //     'success_url' => route('checkout.success', [], true) . "?checkout_session_id={CHECKOUT_SESSION_ID}",
+        //     'cancel_url' => route('checkout.failure', [], true),
+        //     'metadata' => [
+        //         'user_id'  => auth()->user()->id,
+        //     ],
+        // ]);
 
-        return Inertia::location($checkout_session->url);
+        // return Inertia::location($checkout_session->url);
     }
 
     public function success(Request $request)

@@ -117,7 +117,7 @@ const deleteCategory = (categoryId, event) => {
       </header>
 
       <div class="bg-zinc-100 p-4 mb-4 rounded">
-        <span class="block text-sm font-medium mb-4">Category details</span>
+        <span class="block text-sm font-medium mb-4">{{ selectedCategory.name }} Products</span>
         <div
           v-for="(product, index) in selectedCategory.products"
           :key="index"
@@ -129,11 +129,9 @@ const deleteCategory = (categoryId, event) => {
 
           <div>
             <span class="block font-medium text-sm">{{ product.name }}</span>
+           
             <span class="block text-zinc-500 text-sm"
-              >x{{ product.pivot?.quantity }}</span
-            >
-            <span class="block text-zinc-500 text-sm"
-              >€{{ product.pivot?.unit_price }}</span
+              >€{{ product.price }}</span
             >
           </div>
         </div>

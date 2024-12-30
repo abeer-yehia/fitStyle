@@ -7,6 +7,8 @@ use App\Http\Requests\Section\UpdateSectionRequest;
 use App\Http\Resources\SectionResource;
 use App\Models\Section;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 
 class DashboardSectionController extends Controller
 {
@@ -30,6 +32,7 @@ class DashboardSectionController extends Controller
     {
       Section::create([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
         ]);
         return redirect()->route('sections.index');
     }

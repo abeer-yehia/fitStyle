@@ -7,6 +7,7 @@ use App\Http\Requests\Category\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Resources\CategoryResource;
+use Illuminate\Support\Str;
 
 
 class DashboardCategoryController extends Controller
@@ -33,6 +34,7 @@ class DashboardCategoryController extends Controller
     {
       Category::create([
             'name' => $request->name,
+            'slug' => Str::slug($request->name),
         ]);
         return redirect()->route('categories.index');
     }

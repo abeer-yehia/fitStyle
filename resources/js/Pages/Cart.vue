@@ -169,7 +169,7 @@ const productImage = (product) => {
                         </div>
 
                         <Link
-                            :href="route('checkout')"
+                            :href="route('checkout.store')"
                             method="post"
                             as="button"
                             @click="clicked = true"

@@ -35,6 +35,11 @@ const productImage = (product) => {
   const preview = product.images.find((image) => image.is_preview);
   return preview ? "/images/" + preview.url : "/images/default-image.jpg"; // Fallback if no preview image exists
 };
+
+const deleteProduct = (productId, event) => {
+  deleteItem(productId, 'products.destroy', event);
+};
+
 </script>
 
 <template>
@@ -95,21 +100,7 @@ const productImage = (product) => {
         </td>
         <td class="px-4 py-3 text-left">
           <div class="flex items-center justify-end space-x-8 mr-12">
-          <svg
-            @click="selectProduct(product)"
-            class="w-5 h-5 text-zinc-500 hover:text-zinc-700 cursor-pointer"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z"
-            ></path>
-          </svg>
+         
           <Link
             :href="route('products.edit', product.id)"
             class="text-c-green-500 underline"
@@ -127,30 +118,7 @@ const productImage = (product) => {
       </tr>
     </table>
 
-    <div
-      class="bg-white w-80 fixed p-4 right-0 top-0 bottom-0 transform transition duration-150 ease-linear z-20"
-      :class="{ 'translate-x-full': Object.keys(selectedProduct).length === 0 }"
-    >
-      <header class="mb-6">
-        <span class="font-medium block">Product number: {{ selectedProduct.id }}</span>
-      </header>
-
-      <div class="bg-zinc-100 p-4 mb-4 rounded">
-        <span class="block text-sm font-medium mb-4">Product details</span>
-        <div class="bg-zinc-100 rounded pb-4 flex items-center space-x-3">
-          <div class="text-md">Category Name:</div>
-          <span class="font-medium text-sm">
-            {{ selectedProduct?.category?.name }}
-          </span>
-        </div>
-        <div class="bg-zinc-100 rounded pb-4 flex items-center space-x-3">
-          <div class="text-md">Section Name:</div>
-          <span class="font-medium text-sm">
-            {{ selectedProduct?.section?.name }}
-          </span>
-        </div>
-      </div>
-    </div>
+    
 
     <div
       v-if="Object.keys(selectedProduct).length > 0"

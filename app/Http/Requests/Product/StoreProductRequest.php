@@ -24,7 +24,26 @@ class StoreProductRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required','string','max:255'],
+            'name' => ['required', 'string', 'max:255'],
+            'category_id' => ['required', 'exists:categories,id'], 
+            'section_id' => ['required', 'exists:sections,id'],  
+            'description' => ['required', 'string'],
+            'price' => ['required', 'numeric', 'min:0'],          
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
         ];
     }
+
+    public function messages()
+{
+    return [
+        'name.required' => 'The product name is required.',
+        'category_id.required' => 'The category is required.',
+        'category_id.exists' => 'The selected category is invalid.',
+        'section_id.required' => 'The section is required.',
+        'section_id.exists' => 'The selected section is invalid.',
+        'image.image' => 'The uploaded file must be an image.',
+        'image.mimes' => 'The image must be a file of type: jpeg, png, jpg, gif.',
+        'image.max' => 'The image size must not exceed 2 MB.',
+    ];
+}
 }

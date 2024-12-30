@@ -116,7 +116,7 @@ const deleteSection = (sectionId, event) => {
       </header>
 
       <div class="bg-zinc-100 p-4 mb-4 rounded">
-        <span class="block text-sm font-medium mb-4">Section details</span>
+        <span class="block text-sm font-medium mb-4">{{ selectedSection.name }} Products</span>
         <div
           v-for="(product, index) in selectedSection.products"
           :key="index"
@@ -128,11 +128,9 @@ const deleteSection = (sectionId, event) => {
 
           <div>
             <span class="block font-medium text-sm">{{ product.name }}</span>
+          
             <span class="block text-zinc-500 text-sm"
-              >x{{ product.pivot?.quantity }}</span
-            >
-            <span class="block text-zinc-500 text-sm"
-              >€{{ product.pivot?.unit_price }}</span
+              >€{{ product.price }}</span
             >
           </div>
         </div>

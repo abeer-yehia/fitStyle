@@ -48,25 +48,15 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/whishlist', [WhishlistController::class, 'destroy'])->name('whishlist.destroy');
 
     // CHECKOUT
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
-    Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
-    Route::get('/checkout/failure', [CheckoutController::class, 'failure'])->name('checkout.failure');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
     // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/dashboard/orders', [DashboardOrderController::class, 'index'])->name('order.index');
-    // Route::get('/dashboard/sections', [DashboardSectionController::class, 'index'])->name('section.index');
-    // Route::get('/dashboard/sections/create', [DashboardSectionController::class, 'create'])->name('section.create');
-    // Route::post('/dashboard/sections', [DashboardSectionController::class, 'store'])->name('section.store');
-    Route::resource('/dashboard/sections', DashboardSectionController::class)->except(['show']);;
-    Route::resource('/dashboard/categories', DashboardCategoryController::class)->except(['show']);;
-    Route::resource('/dashboard/products', DashboardProductController::class)->except(['show']);;
-    // Route::get('/dashboard/categories', [DashboardCategoryController::class, 'index'])->name('category.index');
-    // Route::get('/dashboard/categories/create', [DashboardCategoryController::class, 'create'])->name('category.create');
-    // Route::post('/dashboard/categories/store', [DashboardCategoryController::class, 'store'])->name('category.store');
-    // Route::get('/dashboard/categories/edit', [DashboardCategoryController::class, 'edit'])->name('category.edit');
-    // Route::patch('/dashboard/categories/update', [DashboardCategoryController::class, 'update'])->name('category.update');
-    // Route::delete('dashboard/categories/{id}', [DashboardCategoryController::class, 'destroy'])->name('category.destroy');
+    Route::resource('/dashboard/sections', DashboardSectionController::class)->except(['show']);
+    Route::resource('/dashboard/categories', DashboardCategoryController::class)->except(['show']);
+    Route::resource('/dashboard/products', DashboardProductController::class)->except(['show']);
+    Route::post('/dashboard/products/{product}/update', [DashboardProductController::class, 'update'])->name('product.post.update');
 
 
     // DASHBOARD SETTINGS
@@ -77,7 +67,5 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/dashboard/settings/password', [DashboardSettingsPasswordController::class, 'update'])->name('settings.password.update');
 });
 
-// STRIPE WEBHOOK
-Route::post('/webhook', [CheckoutController::class, 'webhook'])->name('checkout.webhook');
 
 require __DIR__ . '/auth.php';
