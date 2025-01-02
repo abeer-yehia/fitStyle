@@ -33,7 +33,7 @@ watch(filters.value, (value) => {
 
 const productImage = (product) => {
   const preview = product.images.find((image) => image.is_preview);
-  return preview ? "/images/" + preview.url : "/images/default-image.jpg"; // Fallback if no preview image exists
+  return preview.url ? "/storage/images/" + preview.url : "/images/default-image.jpg"; // Fallback if no preview image exists
 };
 
 const deleteProduct = (productId, event) => {

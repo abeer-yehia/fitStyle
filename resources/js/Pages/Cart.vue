@@ -51,7 +51,8 @@ const productImage = (product) => {
         return image.is_preview;
     });
 
-    return '/images/' + preview.url;
+    return preview.url ? "/storage/images/" + preview.url : "/images/default-image.jpg"; 
+
 }
 </script>
 
@@ -169,7 +170,7 @@ const productImage = (product) => {
                         </div>
 
                         <Link
-                            :href="route('checkout.store')"
+                            :href="route('checkout')"
                             method="post"
                             as="button"
                             @click="clicked = true"

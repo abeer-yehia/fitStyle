@@ -48,7 +48,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/whishlist', [WhishlistController::class, 'destroy'])->name('whishlist.destroy');
 
     // CHECKOUT
-    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
+    Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout');
 
     // DASHBOARD
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');

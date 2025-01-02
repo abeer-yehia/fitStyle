@@ -26,7 +26,7 @@ const form = useForm({
   image: null,
 });
 const imagePreview = ref(
-  '/images/' + page.props.value.product.images[0]?.url
+  '/storage/images/' + page.props.value.product.images[0]?.url
 );
 
 const handleFileUpload = async (event) => {

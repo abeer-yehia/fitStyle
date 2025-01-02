@@ -33,8 +33,7 @@ const productImage = (product) => {
   let preview = product.images.find((image) => {
     return image.is_preview;
   });
-
-  return "/images/" + preview.url;
+  return preview.url ? "/storage/images/" + preview.url : "/images/default-image.jpg"; 
 };
 
 const deleteSection = (sectionId, event) => {

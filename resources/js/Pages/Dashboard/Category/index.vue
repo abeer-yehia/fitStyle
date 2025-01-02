@@ -34,7 +34,8 @@ const productImage = (product) => {
     return image.is_preview;
   });
 
-  return "/images/" + preview.url;
+  return preview.url ? "/storage/images/" + preview.url : "/images/default-image.jpg"; 
+
 };
 
 const deleteCategory = (categoryId, event) => {
