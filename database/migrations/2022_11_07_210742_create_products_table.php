@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description');
             $table->decimal('price', 6, 2);
-            $table->unsignedInteger('available_quantity');
+            $table->unsignedInteger('available_quantity')->nullable();
             $table->timestamps();
         });
     }
