@@ -59,6 +59,15 @@ const resetFilters = () => {
 
         <div v-for="(value, filter) in validFilters" :key="filter">
 
+            <div v-if="filter === 'section'" class="flex items-center space-x-2 relative">
+                <div
+                    v-for="val in value.split(',')"
+                    :key="val"
+                    class="bg-c-green-100 text-c-green-600 text-xs pl-2.5 pr-6 py-1 relative flex items-center space-x-1 rounded-full max-w-max">
+                        <span>{{ val }}</span>
+                        <span @click="removeFilter(filter, val)" class="absolute right-2 -bottom-[1px] text-lg cursor-pointer">&times;</span>
+                </div>
+            </div>
             <div v-if="filter === 'category'" class="flex items-center space-x-2 relative">
                 <div
                     v-for="val in value.split(',')"

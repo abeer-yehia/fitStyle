@@ -58,20 +58,20 @@ watch(
         class="text-xs text-zinc-500 flex items-start space-x-2 cursor-pointer px-2 py-1 rounded"
         :class="{
           'font-medium text-zinc-900 bg-zinc-100':
-            selectedCategory && selectedCategory.includes(category.slug),
+            selectedCategory && selectedCategory.split(',').includes(category.slug),
         }"
       >
         <div
           class="w-4 h-4 flex justify-center items-center cursor-pointer rounded flex-none"
           :class="[
-            selectedCategory && selectedCategory.includes(category.slug)
+            selectedCategory && selectedCategory.split(',').includes(category.slug)
               ? 'bg-c-green-600'
               : 'bg-zinc-300',
           ]"
         >
           <!-- Check svg -->
           <svg
-            v-if="selectedCategory && selectedCategory.includes(category.slug)"
+            v-if="selectedCategory && selectedCategory.split(',').includes(category.slug)"
             class="w-3 h-3 text-white"
             fill="none"
             stroke="currentColor"
